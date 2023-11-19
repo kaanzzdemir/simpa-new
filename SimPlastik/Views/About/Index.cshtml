@@ -1,0 +1,41 @@
+﻿@model List<SimPlastik.Models.Entity.About>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 px-0">
+            <div class="page__top about">
+                <h1>@_localization.Getkey("text-institutional")</h1>
+                <h2><a href="/Home">@_localization.Getkey("text-home")</a> > @_localization.Getkey("text-institutional")</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row my-5 about__page">
+        @*<div class="col-xl-3">
+            <ul class="about__page--list">
+                <a href="#">
+                <li>@_localization.Getkey("text-institutional")</li>
+                </a>
+                <a href="#">
+                <li>@_localization.Getkey("sidebar-vision-mission")</li>
+                </a>
+                <a href="#">
+                <li>@_localization.Getkey("sidebar-policy")</li>
+                </a>
+            </ul>
+        </div>*@
+        <div class="col-xl-12">
+            <div class="about__page--content">
+                @foreach (var item in Model.ToList())
+                {
+                    <h1 class="h1">
+                        @_localization.Getkey("text-about-simpa")
+                    </h1>
+                    <p>
+                       @item.about_text
+                    </p>
+                }
+            </div>
+        </div>
+    </div>
+</div>

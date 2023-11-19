@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="address" xml:space="preserve">
+    <value>Davut Paşa, Maltepe Mah, Çiftehavuzlar Sk. Erciyes Sanayi Sitesi No:11/C İç Kapı No:70-72, 34010 Zeytinburnu/İstanbul</value>
+  </data>
+  <data name="box-info" xml:space="preserve">
+    <value>Box Information</value>
+  </data>
+  <data name="cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="company-name" xml:space="preserve">
+    <value>Simpa Plastic Hangers</value>
+  </data>
+  <data name="correct" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+  <data name="country" xml:space="preserve">
+    <value>Select Country</value>
+  </data>
+  <data name="home-bestsellers" xml:space="preserve">
+    <value>Bestsellers</value>
+  </data>
+  <data name="home-form-heading-1" xml:space="preserve">
+    <value>Your opinions are valuable to us.</value>
+  </data>
+  <data name="home-form-heading-2" xml:space="preserve">
+    <value>Share your opinions with us and we will get back to you as soon as possible.</value>
+  </data>
+  <data name="home-populars" xml:space="preserve">
+    <value>Popular Products</value>
+  </data>
+  <data name="home-product-category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="home-product-code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="home-title" xml:space="preserve">
+    <value>Home Page</value>
+  </data>
+  <data name="language" xml:space="preserve">
+    <value>Active Language</value>
+  </data>
+  <data name="menu-about" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="menu-all-products" xml:space="preserve">
+    <value>All Products</value>
+  </data>
+  <data name="menu-blog" xml:space="preserve">
+    <value>Blog</value>
+  </data>
+  <data name="menu-contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="menu-home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="menu-inst" xml:space="preserve">
+    <value>Instutation</value>
+  </data>
+  <data name="select-language-button" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="select-language-text" xml:space="preserve">
+    <value>Select Language</value>
+  </data>
+  <data name="sidebar-about" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="sidebar-fast-delivery" xml:space="preserve">
+    <value>Fast Delivery</value>
+  </data>
+  <data name="sidebar-policy" xml:space="preserve">
+    <value>Our Policy</value>
+  </data>
+  <data name="sidebar-vision-mission" xml:space="preserve">
+    <value>Vision &amp; Mission</value>
+  </data>
+  <data name="sidebar-whatsapp-text" xml:space="preserve">
+    <value>Send Message on Whatsapp!</value>
+  </data>
+  <data name="text-about-simpa" xml:space="preserve">
+    <value>About Simpa Plastic</value>
+  </data>
+  <data name="text-address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="text-all-categories" xml:space="preserve">
+    <value>All Categories</value>
+  </data>
+  <data name="text-black" xml:space="preserve">
+    <value>Black</value>
+  </data>
+  <data name="text-colors" xml:space="preserve">
+    <value>Colors</value>
+  </data>
+  <data name="text-contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="text-contact-info" xml:space="preserve">
+    <value>Contact Information</value>
+  </data>
+  <data name="text-delivery-info" xml:space="preserve">
+    <value>Shipment Information</value>
+  </data>
+  <data name="text-find" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="text-halfwhite" xml:space="preserve">
+    <value>Half White</value>
+  </data>
+  <data name="text-home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="text-institutional" xml:space="preserve">
+    <value>Institutional</value>
+  </data>
+  <data name="text-mail" xml:space="preserve">
+    <value>Mail</value>
+  </data>
+  <data name="text-mail-or-phone" xml:space="preserve">
+    <value>Mail or Phone</value>
+  </data>
+  <data name="text-message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="text-meters" xml:space="preserve">
+    <value>Box Measurement</value>
+  </data>
+  <data name="text-name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="text-other-contacts" xml:space="preserve">
+    <value>Other Contacts</value>
+  </data>
+  <data name="text-per" xml:space="preserve">
+    <value>Piece Information</value>
+  </data>
+  <data name="text-phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="text-price-info" xml:space="preserve">
+    <value>Price Information</value>
+  </data>
+  <data name="text-products" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="text-same-products" xml:space="preserve">
+    <value>Similar Products</value>
+  </data>
+  <data name="text-send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="text-total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="text-total-price-info" xml:space="preserve">
+    <value>Please contact us to get wholesale prices.</value>
+  </data>
+  <data name="text-weight" xml:space="preserve">
+    <value>Box Weight</value>
+  </data>
+  <data name="text-white" xml:space="preserve">
+    <value>White</value>
+  </data>
+  <data name="website-language" xml:space="preserve">
+    <value>en</value>
+  </data>
+</root>

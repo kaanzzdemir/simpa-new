@@ -1,0 +1,97 @@
+﻿@model List<SimPlastik.Models.Entity.Contact>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 px-0">
+            <div class="page__top about">
+                <h1>@_localization.Getkey("text-contact")</h1>
+                <h2><a href="/Home">@_localization.Getkey("text-home")</a> > @_localization.Getkey("text-contact")</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row contact__page">
+        <div class="col-xl-5 my-5 px-5">
+            @foreach (var item in Model)
+            {
+                <div class="contact__page--item">
+                    <img src="img/company-tel.png" class="img-fluid" alt="iletisim-telefon">
+                    <div class="contact__page--item--text">
+                        <a href="tel:@item.number">
+                            <h3>@_localization.Getkey("text-phone")</h3>
+                            <p>@item.number</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact__page--item">
+                    <img src="img/company-mail.png" class="img-fluid" alt="iletisim-telefon">
+                    <div class="contact__page--item--text">
+                        <a href="mailto:@item.mail">
+                            <h3>@_localization.Getkey("text-mail")</h3>
+                            <p>@item.mail</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact__page--item">
+                    <img src="img/company-pin.png" class="img-fluid" alt="iletisim-telefon">
+                    <div class="contact__page--item--text">
+                        <a href="#">
+                            <h3>@_localization.Getkey("text-address")</h3>
+                            <p>@item.address</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact__page--item">
+                    <div class="contact__page--item--text">
+                        <h3 class="my-3 fw-semibold d-none">@_localization.Getkey("text-other-contacts")</h3>
+                        <div class="d-flex align-items-center mb-2 other-numbers">
+                            <img src="img/languages/en.png" class="img-fluid" width="30" alt="ingilizce-iletisim">
+                            <a href="#">
+                                <p>@item.other_number_1</p>
+                            </a>
+                        </div>
+                        <div class="d-flex align-items-center mb-2 other-numbers">
+                            <img src="img/languages/ar.png" class="img-fluid" width="30" alt="ingilizce-iletisim">
+                            <a href="#">
+                                <p>@item.other_number_2</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact__page--item">
+                    <div class="contact__page--item--text w-100">
+                        <a href="https://wa.me/@item.number.Replace(" ",string.Empty).Replace("+","")" class="flex-row justify-content-center align-items-center p-3 whatsapp">
+                            <p>Whatsapp</p>
+                            <i class="fa-brands fa-whatsapp" style="margin-left: 5px;"></i>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-xl-7 company__contact--form" style="height: 400px;">
+            <h1 class="h4">@_localization.Getkey("home-form-heading-1")</h1>
+            <h2 class="h6 fw-light">@_localization.Getkey("home-form-heading-2")</h2>
+            <input class="form-control" placeholder="@_localization.Getkey("text-name")" type="text">
+            <input class="form-control" placeholder="@_localization.Getkey("text-mail-or-phone")" type="text">
+            <textarea class="form-control" rows="8" placeholder="@_localization.Getkey("text-message")" type="text"></textarea>
+            <button class="btn btn-sm border">@_localization.Getkey("text-send")</button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var elements = document.querySelectorAll(".other-numbers a p");
+ 
+    elements.forEach(function (element) {
+        var isNull = element.innerHTML.trim() === ""; // innerHTML'i alırken trim() kullanarak başındaki ve sonundaki boşlukları temizler
+        if (isNull) {
+            var parentDiv = element.closest(".other-numbers"); // p öğesinin en yakın üst öğesi olan .other-numbers div'ini bul
+            if (parentDiv) {
+                parentDiv.style.visibility = "hidden"; // .other-numbers div'ini gizle
+            }
+        }
+    });
+
+
+</script>

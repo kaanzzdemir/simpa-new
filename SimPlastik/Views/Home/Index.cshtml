@@ -1,0 +1,171 @@
+﻿@model SimPlastik.Models.ViewModels.LayoutViewModel
+
+@{
+    ViewData["Title"] = @_localization.Getkey("home-title");
+}
+<div class="container my-4 px-md-0 px-4">
+    <div class="row">
+        <div class="col-xl-9 col-md-8 p-0 px-1">
+            <div class="slick-slider slider">
+                <div class="item">
+                    <img src="img/series-1.png" alt="">
+                </div>
+                <div class="item">
+                    <img src="img/series-2.png" alt="">
+                </div>
+                <div class="item">
+                    <img src="img/series-3.png" alt="">
+                </div>
+                <div class="item">
+                    <img src="img/series-4.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-4 mt-md-0 mt-4">
+            <h1 class="h4">@_localization.Getkey("home-bestsellers")</h1>
+            <div class="slick-slider product-slider">
+                @foreach (var product in Model.Products)
+                {
+                    <div class="item">
+                        <div class="product">
+                            <a href="/ProductDetail/@product.product_name.ToLower().Replace(" ","-")" class="text-decoration-none">
+                                <div class="product__images">
+                                    <img src="img/products/@product.product_img_1" class="img-fluid" alt="@product.product_name">
+                                </div>
+                                <div class="product__color">
+                                    <div class="product__color--item black">
+                                    </div>
+                                    <div class="product__color--item white">
+                                    </div>
+                                    <div class="product__color--item half-white">
+                                    </div>
+                                </div>
+                                <div class="product__content">
+                                    <h1>@product.product_name</h1>
+
+                                    @foreach (var category in Model.Categories)
+                                    {
+                                        @if (product.category_id == category.category_id)
+                                        {
+                                            <div class="product__content--category">
+                                                @_localization.Getkey("home-product-category") : @category.category_name
+                                            </div>
+                                            break;
+                                        }
+                                    }
+                                    <div class="product__content--model d-flex">
+                                        <span>@_localization.Getkey("home-product-code") :</span> <h2>@product.product_code</h2>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mt-xl-0 mt-5 px-md-0 px-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="h4">@_localization.Getkey("home-populars")</h1>
+        </div>
+    </div>
+    <div class="row">
+        @foreach (var product in Model.Products)
+        {
+            <div class="col-xl-3 col-6 mb-lg-0 mb-4 p-0 px-1">
+                <div class="product">
+                    <a href="#" class="text-decoration-none">
+                        <div class="product__images">
+                            <img src="img/products/@product.product_img_1" class="img-fluid" alt="@product.product_name">
+                        </div>
+                        <div class="product__color">
+                            <div class="product__color--item black">
+                            </div>
+                            <div class="product__color--item white">
+                            </div>
+                            <div class="product__color--item half-white">
+                            </div>
+                        </div>
+                        <div class="product__content">
+                            <h1>@product.product_name</h1>
+
+                            @foreach (var category in Model.Categories)
+                            {
+                                @if (product.category_id == category.category_id)
+                                {
+                                    <div class="product__content--category">
+                                        @_localization.Getkey("home-product-category") : @category.category_name
+                                    </div>
+                                    break;
+                                }
+                            }
+                            <div class="product__content--model d-flex">
+                                <span>@_localization.Getkey("home-product-code") :</span> <h2>@product.product_code</h2>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-12 px-0">
+            <div class="page-divider text-center">
+                <h1 class="h1">@_localization.Getkey("company-name")</h1>
+                @foreach (var item in Model.Abouts)
+                {
+                    <h2 class="h5">
+                        @item.about_text
+                    </h2>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row text-center  company-info">
+        @foreach (var item in Model.Contacts)
+        {
+            <div class="col-xl-4 my-5">
+                <img src="img/company-tel.png" class="img-fluid" alt="sirket-mail">
+                <h4>@_localization.Getkey("text-phone")</h4>
+                <a href="tel: @item.number">@item.number</a>
+                <a href="tel: @item.number">@item.number</a>
+            </div>
+            <div class="col-xl-4 my-5">
+                <img src="img/company-pin.png" class="img-fluid" alt="sirket-mail">
+                <h4>@_localization.Getkey("text-address")</h4>
+                <a href="#">@_localization.Getkey("address")</a>
+            </div>
+            <div class="col-xl-4 my-5">
+                <img src="img/company-mail.png" class="img-fluid" alt="sirket-mail">
+                <h4>@_localization.Getkey("text-mail")</h4>
+                <a href="mailto:info@simpaski.com">info@simpaski.com</a>
+            </div>
+        }
+
+    </div>
+</div>
+<div class="container">
+    <div class="row company__contact">
+        <div class="col-xl-6 px-0">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3009.925446251811!2d28.9030247!3d41.026887!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cabb965ad2db17%3A0x71595f05f4055cf5!2sSimpa%20Plastik%20Ask%C4%B1!5e0!3m2!1str!2str!4v1699707284205!5m2!1str!2str"
+                    width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="col-xl-6 company__contact--form">
+            <h1 class="h4">@_localization.Getkey("home-form-heading-1")</h1>
+            <h2 class="h6 fw-light">@_localization.Getkey("home-form-heading-2")</h2>
+            <input class="form-control" placeholder="@_localization.Getkey("text-name")" type="text">
+            <input class="form-control" placeholder="@_localization.Getkey("text-mail-or-phone")" type="text">
+            <textarea class="form-control" rows="8" placeholder="@_localization.Getkey("text-message")" type="text"></textarea>
+            <button class="btn btn-sm border">@_localization.Getkey("text-send")</button>
+        </div>
+    </div>
+</div>

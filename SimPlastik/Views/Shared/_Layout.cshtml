@@ -1,0 +1,363 @@
+﻿@model SimPlastik.Models.ViewModels.LayoutViewModel
+@{
+    var imgPath = "/img/languages/" + @_localization.Getkey("website-language") + ".png";
+}
+<!DOCTYPE html>
+<html lang="@_localization.Getkey("website-language")">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Simpa Plastik</title>
+    <link rel="stylesheet" href="~/css/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/reset.css">
+    <link rel="stylesheet" href="~/css/fonts.css">
+    <link rel="stylesheet" href="~/css/site.css">
+    <link rel="stylesheet" href="~/css/slick.css">
+</head>
+<body>
+    <div class="container-fluid px-0">
+        <div class="top__navbar">
+            <div class="container d-flex align-items-center justify-content-between">
+                <div class="top__navbar--languages">
+                    <button class="btn btn-sm border d-flex align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#languageModal">
+                        <img src="@imgPath" class="img-fluid" alt="tr-bayrak" style="object-fit: cover;">
+                        <span>@_localization.Getkey("select-language-button")</span>
+                    </button>
+                </div>
+                <div class="top__navbar--tel">
+                    <a href="tel:">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                        <span></span>
+                    </a>
+                </div>
+                <div class="top__navbar--mail">
+                    <a href="mailto:">
+                        <i class="bi bi-envelope"></i>
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar d-xl-none d-block" id="mobile-nav" aria-label="Dark offcanvas navbar">
+        <div class="container-fluid">
+            <div class="navbarLogo">
+                <img src="~/img/logo_yazisiz.png" width="40" class="img-fluid" alt="simpa-plastik-logo">
+            </div>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbarDark" aria-controls="offcanvasNavbarDark" aria-label="Toggle navigation">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbarDark"
+                 aria-labelledby="offcanvasNavbarDarkLabel">
+                <div class="offcanvas-header justify-content-center">
+                    <img src="~/img/logo_yazisiz.png" width="50px" class="img-fluid" alt="simpa-logo">
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 p-0">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#">@_localization.Getkey("menu-home")<i class="fa-solid fa-house"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Product/ProductList">@_localization.Getkey("menu-all-products")<i class="fa-solid fa-box-open"></i></a>
+                        </li>
+                        @foreach (var topCategory in Model.TopCategories)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-link" href="#" role="button" data-bs-toggle="elbise-askilari"
+                                   aria-expanded="false" data-target="elbise-askilari">
+                                    @topCategory.top_category_name
+                                </a>
+                                <ul class="dropdown-menu" id="elbise-askilari">
+                                    @foreach (var category in Model.Categories)
+                                    {
+                                        <li><a class="dropdown-item" href="#">@category.category_name</a></li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-link" href="#" role="button" data-bs-toggle="dropdown-menu-1"
+                               aria-expanded="false" data-target="dropdown-menu-2">
+                                @_localization.Getkey("menu-inst")
+                            </a>
+                            <ul class="dropdown-menu" id="dropdown-menu-2">
+                                <li><a class="dropdown-item" href="#">@_localization.Getkey("sidebar-about")</a></li>
+                                <li><a class="dropdown-item" href="#">@_localization.Getkey("sidebar-vision-mission")</a></li>
+                                <li><a class="dropdown-item" href="#">@_localization.Getkey("sidebar-policy")</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="offcanvas-footer">
+                    <div class="offcanvas-footer--contact">
+
+                    </div>
+                    <div class="offcanvas-footer--whatsapp">
+                        <a href="">
+                            <span> @_localization.Getkey("sidebar-whatsapp-text")</span>
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <nav class="navbar d-xl-block d-none navbar-expand-xl bg-body-tertiary">
+        <div class="container">
+            <div class="navbarLogo">
+                <img src="~/img/logo_yazisiz.png" width="40" class="img-fluid" alt="simpa-plastik-logo">
+            </div>
+            <ul class="navbar-nav me-auto mb-2 mb-xl-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/Home">@_localization.Getkey("menu-home")</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/About"> @_localization.Getkey("menu-about")</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="/Product/ProductList" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        @_localization.Getkey("menu-all-products")<i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <div class="row">
+                            <div class="col-3">
+                                <img src="~/img/desktop-menu/menu.jpg" class="w-100 h-100" alt="plastik-askilar">
+                            </div>
+                            <div class="col-3">
+                                <ul>
+                                    <h1>Mağaza Askıları</h1>
+                                    <li>
+                                        <h2>
+                                            <a href="/Product/ProductList">Üst Giyim Askıları</a>
+                                        </h2>
+                                    </li>
+                                    <li>
+                                        <h2>
+                                            <a href="#">alt giyim askıları</a>
+                                        </h2>
+                                    </li>
+                                    <li>
+                                        <h2>
+                                            <a href="#">çocuk askıları</a>
+                                        </h2>
+                                    </li>
+                                    <li>
+                                        <h2>
+                                            <a href="#">ceket askıları</a>
+                                        </h2>
+                                    </li>
+                                    <li>
+                                        <h2>
+                                            <a href="#">takım & kurutemizleme askıları</a>
+                                        </h2>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-3">
+                                <ul>
+                                    <h1>Showroom Askıları</h1>
+                                    <li>
+                                        <h2>
+                                            <a href="#">Üst Giyim Askıları</a>
+                                        </h2>
+                                    </li>
+                                    <li>
+                                        <h2>
+                                            <a href="#">flok kaplamalı askılar</a>
+                                        </h2>
+                                    </li>
+                                    <li>
+                                        <h2>
+                                            <a href="#">tahta görünümlü plastik askılar</a>
+                                        </h2>
+                                    </li>
+                                    <li>
+                                        <h2>
+                                            <a href="#">mağaza askıları</a>
+                                        </h2>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-3">
+                                <ul>
+                                    <h1>Diğer Ürünler</h1>
+                                    <li>
+                                        <h2>
+                                            <a href="#">Kılçıklı çorap askısı</a>
+                                        </h2>
+                                    </li>
+                                    <li>
+                                        <h2>
+                                            <a href="#">geçmeli çorap askısı</a>
+                                        </h2>
+                                    </li>
+                                    <li>
+                                        <h2>
+                                            <a href="#">Patik askısı</a>
+                                        </h2>
+                                    </li>
+                                    <li>
+                                        <h2>
+                                            <a href="#">Kumaşlar</a>
+                                        </h2>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="offset-xl-3 col-9 features">
+                                <div class="features-item">
+                                    <i class="fa-solid fa-truck-ramp-box"></i>
+                                    <span>@_localization.Getkey("sidebar-fast-delivery")</span>
+                                </div>
+                            </div>
+                        </div>
+                    </ul>
+                </li>
+                @*<li class="nav-item">
+                        <a class="nav-link" href="/Blog">@_localization.Getkey("menu-blog")</a>
+                    </li>*@
+                <li class="nav-item">
+                    <a class="nav-link" href="/Contact">@_localization.Getkey("menu-contact")</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+    <div class="container">
+        <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-xl-5 py-0 pt-5 mt-5 border-top">
+            <div class="col mb-3">
+                <a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">
+                    <img src="~/img/logo_yazisiz.png" class="img-fluid" alt="simpa-logo">
+                </a>
+                <p class="mb-3">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut inventore ab eligendi praesentium
+                    qui suscipit doloremque nulla laudantium iusto delectus ipsam.
+                </p>
+                <p class="text-body-secondary">Kaan Özdemir © 2023</p>
+            </div>
+
+            <div class="col mb-3">
+
+            </div>
+
+            <div class="col mb-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                </ul>
+            </div>
+
+            <div class="col mb-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                </ul>
+            </div>
+
+            <div class="col mb-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+    <div class="modal modal-language fade" id="languageModal" tabindex="-1" aria-labelledby="languageModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="languageModalLabel">@_localization.Getkey("select-language-text")</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="select-country">
+                        <label for="countrySelect">@_localization.Getkey("country")</label>
+                        <select class="form-select" id="countrySelect" aria-label="Country Select">
+                            @*<option>
+                                    <a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US">
+                                        Amerika
+                                    </a>
+                                </option>*@
+                        </select>
+                    </div>
+                    <div class="select-language mt-4">
+                        <label>@_localization.Getkey("language")</label>
+                        <a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US" id="tr" style="visibility:hidden;"></a>
+                        <a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="tr-TR" id="en" style="visibility:hidden;"></a>
+                        <a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="ar-SA" id="ar" style="visibility:hidden;"></a>
+                        <select class="form-select" disabled aria-label="Language Select">
+                            <option selected id="selectedLanguage"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm" data-bs-dismiss="modal">@_localization.Getkey("cancel")</button>
+                    <button type="button" class="btn btn-sm border" id="selectLanguageButton">@_localization.Getkey("correct")</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/css/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/jquery/dist/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/dfb25297ac.js" crossorigin="anonymous"></script>
+    <script src="~/js/general.js"></script>
+    <script src="~/js/mobile-menu.js"></script>
+    <script src="~/js/site-menu.js"></script>
+    <script src="~/js/slick.min.js"></script>
+    <script src="~/js/slick-slider.js"></script>
+    <script>
+        function setLanguageAndRedirect(languageCode) {
+            // Dil bilgisini çerezde sakla
+            document.cookie = "language=" + languageCode + "; path=/";
+
+            // Yeni sayfaya yönlendir
+            window.location.reload();
+
+
+            // Çerezden dil bilgisini al
+            function getLanguageFromCookie() {
+                var name = "language=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var cookieArray = decodedCookie.split(';');
+
+                for (var i = 0; i < cookieArray.length; i++) {
+                    var cookie = cookieArray[i].trim();
+                    if (cookie.indexOf(name) == 0) {
+                        return cookie.substring(name.length, cookie.length);
+                    }
+                }
+
+                return null;
+            }
+
+            // Sayfa yüklendiğinde dil kontrolü yap
+            window.onload = function () {
+                var savedLanguage = getLanguageFromCookie();
+                debugger;
+                // Eğer çerezde dil bilgisi varsa, sayfayı o dilde göster
+                if (savedLanguage) {
+                    // Dil değiştirme işlemleri burada yapılır
+                    // Örneğin, Localizer kullanarak dil değiştirme işlemleri
+                    // ...
+                }
+            };
+        }</script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
