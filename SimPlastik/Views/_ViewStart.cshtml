@@ -1,3 +1,23 @@
-﻿@{
+﻿@using SimPlastik.Models.Entity;
+@{
     Layout = "_Layout";
+
+    var dbContext = Context.RequestServices.GetService<SimPlastik.Models.Context.SimpaDbContext>();
+
+    var layoutViewModel = new SimPlastik.Models.ViewModels.LayoutViewModel
+    {
+        // ViewModel'iniz için gerekli verileri atayın
+        Contacts = dbContext.Contacts.ToList(),
+        Abouts = dbContext.Abouts.ToList(),
+        Categories = dbContext.Categories.ToList(),
+        TopCategories = dbContext.TopCategory.ToList(),
+        Products = dbContext.Products.ToList()
+    };
+
+    var currentCulture = Thread.CurrentThread.CurrentCulture.Name;
+
+    ViewBag.Language = currentCulture;
+ViewBag.SimpaDbContext = dbContext;
+    ViewBag.ViewModel = layoutViewModel;
 }
+

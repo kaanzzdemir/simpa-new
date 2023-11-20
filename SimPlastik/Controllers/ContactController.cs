@@ -15,14 +15,15 @@ namespace SimPlastik.Controllers
         }
         public IActionResult Index()
         {
-            var contact_text = _context.Contacts.ToList();
-
-            var viewModel = new LayoutViewModel
+            var productViewModel = new LayoutViewModel
             {
-                Contacts = contact_text
+                Contacts = _context.Contacts.ToList(),
+                Abouts = _context.Abouts.ToList(),
+                Products = _context.Products.ToList(),
+                Categories = _context.Categories.ToList()
             };
 
-            return View(contact_text);
+            return View(productViewModel);
         }
     }
 }

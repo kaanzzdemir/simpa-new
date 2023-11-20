@@ -156,6 +156,9 @@
   <data name="home-title" xml:space="preserve">
     <value>الصفحة الرئيسية</value>
   </data>
+  <data name="item-not-found" xml:space="preserve">
+    <value>العنصر غير موجود</value>
+  </data>
   <data name="language" xml:space="preserve">
     <value>اللغة النشطة</value>
   </data>
@@ -207,8 +210,14 @@
   <data name="text-all-categories" xml:space="preserve">
     <value>جميع الفئات</value>
   </data>
+  <data name="text-all-products" xml:space="preserve">
+    <value>جميع المنتجات</value>
+  </data>
   <data name="text-black" xml:space="preserve">
     <value>أسود</value>
+  </data>
+  <data name="text-categories" xml:space="preserve">
+    <value>فئات</value>
   </data>
   <data name="text-colors" xml:space="preserve">
     <value>الألوان</value>
@@ -233,6 +242,9 @@
   </data>
   <data name="text-institutional" xml:space="preserve">
     <value>المؤسسية</value>
+  </data>
+  <data name="text-links" xml:space="preserve">
+    <value>روابط</value>
   </data>
   <data name="text-mail" xml:space="preserve">
     <value>بريد</value>

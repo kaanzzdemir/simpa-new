@@ -1,4 +1,6 @@
-﻿<div class="container-fluid">
+﻿@model SimPlastik.Models.ViewModels.LayoutViewModel
+
+<div class="container-fluid">
     <div class="row">
         <div class="col-12 px-0">
             <div class="page__top about">
@@ -14,199 +16,123 @@
             <div class="product__list--category">
                 <h1 class="h5">@_localization.Getkey("text-all-categories")</h1>
                 <ul>
-                    <a href="">
-                    <li>Üst Giyim Askıları</li>
+                    <a href="/Product/ProductList">
+                    <li>@_localization.Getkey("text-all-products")</li>
                     </a>
-                    <a href="">
-                    <li>Alt Giyim Askıları</li>
-                    </a>
-                    <a href="">
-                    <li>Çocuk Askıları</li>
-                    </a>
-                    <a href="">
-                    <li>Takım & Kurutemizleme Askıları</li>
-                    </a>
-                    <a href="">
-                    <li>Takım & Kurutemizleme Askıları</li>
-                    </a>
-                    <a href="">
-                    <li>Takım & Kurutemizleme Askıları</li>
-                    </a>
-                    <a href="">
-                    <li>Takım & Kurutemizleme Askıları</li>
-                    </a>
+                    @foreach (var category in Model.Categories)
+                    {
+                        if (ViewBag.Language == "tr-TR")
+                        {
+                            <a href="@Url.Action("ProductListByCategory", "Product", new { categoryId = category.category_id })">
+                            <li>@category.category_name</li>
+                            </a>
+                        }
+                        else if (ViewBag.Language == "en-US")
+                        {
+                            <a href="@Url.Action("ProductListByCategory", "Product", new { categoryId = category.category_id })">
+                            <li>@category.category_name_en</li>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("ProductListByCategory", "Product", new { categoryId = category.category_id })">
+                            <li>@category.category_name_ar</li>
+                            </a>
+                        }
+
+                    }
                 </ul>
             </div>
         </div>
         <div class="col-xl-9">
             <div class="row">
-                <div class="col-12 pb-3 mb-3 border-bottom product__list--info">
-                    @_localization.Getkey("text-total") 13 tane <b>Elbise Askısı</b> @_localization.Getkey("text-find")
-                </div>
+                @if (Model.Products.Count == 0)
+                {
+                    <div class="col-12 pb-3 mb-3 border-bottom product__list--info">
+                        @_localization.Getkey("text-total") 0 item @_localization.Getkey("text-find")
+                    </div>
+                }
+                else
+                {
+                    foreach (var product in Model.Products)
+                    {
+                        <div class="col-12 pb-3 mb-3 border-bottom product__list--info">
+                            @_localization.Getkey("text-total") @Model.Products.Count item @_localization.Getkey("text-find")
+                        </div>
+                        break;
+                    }
+                }
+
             </div>
             <div class="row product__list--list">
-                <div class="col-md-4 col-6 mb-lg-0 mb-2 product__list--list--item p-0 px-1">
-                    <div class="product">
-                        <a href="/Product/ProductDetail" class="text-decoration-none">
-                            <div class="product__images">
-                                <img src="~/img/products/aski.webp" class="img-fluid" alt="">
-                            </div>
-                            <div class="product__color">
-                                <div class="product__color--item black" title="Siyah">
+                @if (Model.Products.Count == 0)
+                {
+                    <div class="product-not-found"><i class="bi bi-ban"></i><span>@_localization.Getkey("item-not-found")</span></div>
+                }
+                @foreach (var product in Model.Products)
+                {
+                    <div class="col-md-4 col-6 mb-lg-0 mb-2 product__list--list--item p-0 px-1">
+                        <div class="product">
+                            <a href="@Url.Action("ProductDetail", "Product", new { productId = product.product_id })" class="text-decoration-none">
+                                <div class="product__images">
+                                    <img src="~/img/products/@product.product_img_1" class="img-fluid" alt="@product.product_name">
                                 </div>
-                                <div class="product__color--item white" title="Beyaz">
+                                <div class="product__color">
+                                    <div class="product__color--item black" title="Siyah">
+                                    </div>
+                                    <div class="product__color--item white" title="Beyaz">
+                                    </div>
+                                    <div class="product__color--item half-white" title="Kırık Beyaz">
+                                    </div>
                                 </div>
-                                <div class="product__color--item half-white" title="Kırık Beyaz">
+                                <div class="product__content">
+                                    @if (ViewBag.Language == "tr-TR")
+                                    {
+                                        <h1>@product.product_name</h1>
+                                    }
+                                    else if (ViewBag.Language == "en-US")
+                                    {
+                                        <h1>@product.product_name_en</h1>
+                                    }
+                                    else
+                                    {
+                                        <h1>@product.product_name_ar</h1>
+                                    }
+                                    @foreach (var category in Model.Categories)
+                                    {
+                                        @if (product.category_id == category.category_id)
+                                        {
+                                            @if (ViewBag.Language == "tr-TR")
+                                            {
+                                                <div class="product__content--category">
+                                                    @_localization.Getkey("home-product-category") : @category.category_name
+                                                </div>
+                                            }
+                                            else if (ViewBag.Language == "en-US")
+                                            {
+                                                <div class="product__content--category">
+                                                    @_localization.Getkey("home-product-category") : @category.category_name_en
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="product__content--category">
+                                                    @_localization.Getkey("home-product-category") : @category.category_name_ar
+                                                </div>
+                                            }
+                                            break;
+                                        }
+                                    }
+                                    <div class="product__content--model d-flex">
+                                        <span>@_localization.Getkey("home-product-code") : </span>
+                                        <h2>@product.product_code</h2>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="product__content">
-                                <h1>Üst giyim elbise askısı</h1>
-                                <div class="product__content--category">
-                                    @_localization.Getkey("home-product-category") : Elbise Askıları
-                                </div>
-                                <div class="product__content--model d-flex">
-                                    <span>@_localization.Getkey("home-product-code") : </span>
-                                    <h2>T43</h2>
-                                </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4 col-6 mb-lg-0 mb-2  p-0 px-1">
-                    <div class="product">
-                        <a href="#" class="text-decoration-none">
-                            <div class="product__images">
-                                <img src="~/img/products/aski.webp" class="img-fluid" alt="">
-                            </div>
-                            <div class="product__color">
-                                <div class="product__color--item black" title="Siyah">
-                                </div>
-                                <div class="product__color--item white" title="Beyaz">
-                                </div>
-                                <div class="product__color--item half-white" title="Kırık Beyaz">
-                                </div>
-                            </div>
-                            <div class="product__content">
-                                <h1>Üst giyim elbise askısı</h1>
-                                <div class="product__content--category">
-                                    @_localization.Getkey("home-product-category") : Elbise Askıları
-                                </div>
-                                <div class="product__content--model d-flex">
-                                    <span>@_localization.Getkey("home-product-code") : </span>
-                                    <h2>T43</h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4 col-6 mb-lg-0 mb-1 p-0 px-1">
-                    <div class="product">
-                        <a href="#" class="text-decoration-none">
-                            <div class="product__images">
-                                <img src="~/img/products/aski.webp" class="img-fluid" alt="">
-                            </div>
-                            <div class="product__color">
-                                <div class="product__color--item black" title="Siyah">
-                                </div>
-                                <div class="product__color--item white" title="Beyaz">
-                                </div>
-                                <div class="product__color--item half-white" title="Kırık Beyaz">
-                                </div>
-                            </div>
-                            <div class="product__content">
-                                <h1>Üst giyim elbise askısı</h1>
-                                <div class="product__content--category">
-                                    @_localization.Getkey("home-product-category") : Elbise Askıları
-                                </div>
-                                <div class="product__content--model d-flex">
-                                    <span>@_localization.Getkey("home-product-code") : </span>
-                                    <h2>T43</h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4 col-6 mb-lg-0 mb-1 mt-2 p-0 px-1">
-                    <div class="product">
-                        <a href="#" class="text-decoration-none">
-                            <div class="product__images">
-                                <img src="~/img/products/aski.webp" class="img-fluid" alt="">
-                            </div>
-                            <div class="product__color">
-                                <div class="product__color--item black" title="Siyah">
-                                </div>
-                                <div class="product__color--item white" title="Beyaz">
-                                </div>
-                                <div class="product__color--item half-white" title="Kırık Beyaz">
-                                </div>
-                            </div>
-                            <div class="product__content">
-                                <h1>Üst giyim elbise askısı</h1>
-                                <div class="product__content--category">
-                                    @_localization.Getkey("home-product-category") : Elbise Askıları
-                                </div>
-                                <div class="product__content--model d-flex">
-                                    <span>@_localization.Getkey("home-product-code") : </span>
-                                    <h2>T43</h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4 col-6 mb-lg-0 mb-1 mt-2 p-0 px-1">
-                    <div class="product">
-                        <a href="#" class="text-decoration-none">
-                            <div class="product__images">
-                                <img src="~/img/products/aski.webp" class="img-fluid" alt="">
-                            </div>
-                            <div class="product__color">
-                                <div class="product__color--item black" title="Siyah">
-                                </div>
-                                <div class="product__color--item white" title="Beyaz">
-                                </div>
-                                <div class="product__color--item half-white" title="Kırık Beyaz">
-                                </div>
-                            </div>
-                            <div class="product__content">
-                                <h1>Üst giyim elbise askısı</h1>
-                                <div class="product__content--category">
-                                    @_localization.Getkey("home-product-category") : Elbise Askıları
-                                </div>
-                                <div class="product__content--model d-flex">
-                                    <span>@_localization.Getkey("home-product-code") : </span>
-                                    <h2>T43</h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4 col-6 mb-lg-0 mb-4 mt-2 p-0 px-1">
-                    <div class="product">
-                        <a href="#" class="text-decoration-none">
-                            <div class="product__images">
-                                <img src="~/img/products/aski.webp" class="img-fluid" alt="">
-                            </div>
-                            <div class="product__color">
-                                <div class="product__color--item black" title="@_localization.Getkey("text-black")">
-                                </div>
-                                <div class="product__color--item white" title="@_localization.Getkey("text-white")">
-                                </div>
-                                <div class="product__color--item half-white" title="@_localization.Getkey("text-halfwhite")">
-                                </div>
-                            </div>
-                            <div class="product__content">
-                                <h1>Üst giyim elbise askısı</h1>
-                                <div class="product__content--category">
-                                    @_localization.Getkey("home-product-category") : Elbise Askıları
-                                </div>
-                                <div class="product__content--model d-flex">
-                                    <span>@_localization.Getkey("home-product-code") : </span>
-                                    <h2>T43</h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                }
+
             </div>
         </div>
     </div>

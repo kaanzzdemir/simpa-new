@@ -6,7 +6,9 @@ namespace SimPlastik.Models.Entity
     {
         [Key]
         public int category_id { get; set; }
-        public string category_name { get; set; }
+        public string? category_name_en { get; set; }
+        public string? category_name_ar { get; set; }
+        public string? category_name { get; set; }
         public TopCategory topCategory { get; set; }
         public int top_category_id { get; set; }
     }

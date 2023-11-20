@@ -1,283 +1,393 @@
-﻿<div class="container-fluid">
+﻿@model SimPlastik.Models.ViewModels.LayoutViewModel
+
+<div class="container-fluid">
     <div class="row">
         <div class="col-12 px-0">
             <div class="page__top about">
-                <h1>MAU 45 Elbise Askısı</h1>
-                <h2>
-                    <a href="/Home">@_localization.Getkey("text-home")</a> > <a href="/Product/ProductList">@_localization.Getkey("text-products")</a>  > MAU 45</a> Elbise
-                    Askısı
-                </h2>
+                @foreach (var prodTop in Model.Products.Where(x => x.product_id == ViewBag.prodId))
+                {
+                    @if (ViewBag.Language == "tr-TR")
+                    {
+                        <h1>@prodTop.product_code @prodTop.product_name</h1>
+                        <h2>
+                            <a href="/Home">
+                                @_localization.Getkey("text-home")
+                            </a> >
+                            <a href="/Product/ProductList">
+                                @_localization.Getkey("text-products")
+                            </a>  > @prodTop.product_code @prodTop.product_name
+                        </h2>
+                    }
+                    else if (ViewBag.Language == "en-US")
+                    {
+                        <h1>@prodTop.product_code @prodTop.product_name_en</h1>
+                        <h2>
+                            <a href="/Home">
+                                @_localization.Getkey("text-home")
+                            </a> >
+                            <a href="/Product/ProductList">
+                                @_localization.Getkey("text-products")
+                            </a>  > @prodTop.product_code @prodTop.product_name_en
+                        </h2>
+                    }
+                    else
+                    {
+                        <h1>@prodTop.product_code @prodTop.product_name_ar</h1>
+                        <h2>
+                            <a href="/Home">
+                                @_localization.Getkey("text-home")
+                            </a> >
+                            <a href="/Product/ProductList">
+                                @_localization.Getkey("text-products")
+                            </a>  > @prodTop.product_code @prodTop.product_name_ar
+                        </h2>
+                    }
+                    break;
+                }
             </div>
         </div>
     </div>
 </div>
 <div class="container">
-    <div class="row product__detail">
-        <div class="col-xl-6">
-            <div class="product__detail--product-img">
-                <div class="slider-for">
-                    <div>
-                        <img src="~/img/products/aski.webp" class="img-fluid" alt="">
+
+    @foreach (var product in Model.Products.Where(x => x.product_id == @ViewBag.prodId).Take(1))
+    {
+        <div class="row product__detail">
+            <div class="col-xl-6">
+                <div class="product__detail--product-img">
+                    <div class="slider-for">
+                        <div>
+                            <img src="~/img/products/@product.product_img_1" class="img-fluid" alt="">
+                        </div>
+                        @if (product.product_img_4 == "" || product.product_img_2 == null) { }
+                        else
+                        {
+                            <div>
+                                <img src="~/img/products/@product.product_img_2" class="img-fluid" alt="">
+                            </div>
+                        }
+                        @if (product.product_img_4 == "" || product.product_img_3 == null) { }
+                        else
+                        {
+                            <div>
+                                <img src="~/img/products/@product.product_img_3" class="img-fluid" alt="">
+                            </div>
+                        }
+                        @if (product.product_img_4 == "" || product.product_img_4 == null) { }
+                        else
+                        {
+                            <div>
+                                <img src="~/img/products/@product.product_img_4" class="img-fluid" alt="">
+                            </div>
+                        }
                     </div>
-                    <div>
-                        <img src="~/img/products/saki.webp" class="img-fluid" alt="">
-                    </div>
-                    <div>
-                        <img src="~/img/products/aski.webp" class="img-fluid" alt="">
-                    </div>
-                    <div>
-                        <img src="~/img/products/saki.webp" class="img-fluid" alt="">
+                    <div class="product__detail--product-img--images">
+                        <div class="slider-nav">
+                            <div>
+                                <img src="~/img/products/@product.product_img_1" class="img-fluid" alt="">
+                            </div>
+                            @if (product.product_img_4 == "" || product.product_img_2 == null) { }
+                            else
+                            {
+                                <div>
+                                    <img src="~/img/products/@product.product_img_2" class="img-fluid" alt="">
+                                </div>
+                            }
+                            @if (product.product_img_4 == "" || product.product_img_3 == null) { }
+                            else
+                            {
+                                <div>
+                                    <img src="~/img/products/@product.product_img_3" class="img-fluid" alt="">
+                                </div>
+                            }
+                            @if (product.product_img_4 == "" || product.product_img_4 == null) { }
+                            else
+                            {
+                                <div>
+                                    <img src="~/img/products/@product.product_img_4" class="img-fluid" alt="">
+                                </div>
+                            }
+                        </div>
                     </div>
                 </div>
-                <div class="product__detail--product-img--images">
-                    <div class="slider-nav">
-                        <div>
-                            <img src="~/img/products/aski.webp" class="img-fluid" alt="">
+            </div>
+            <div class="col-xl-5 offset-xl-1">
+                <div class="product__detail--product-content">
+                    <div class="product__detail--product-content--heading">
+                        @if (ViewBag.Language == "tr-TR")
+                        {
+                            <h1> <span>@product.product_code</span> | @product.product_name</h1>
+                            @foreach (var category in Model.Categories)
+                            {
+                                @if (product.category_id == category.category_id)
+                                {
+                                    <h2>@category.category_name</h2>
+                                    break;
+                                }
+
+                            }
+                        }
+                        else if (ViewBag.Language == "en-US")
+                        {
+                            <h1> <span>@product.product_code</span> | @product.product_name_en</h1>
+                            @foreach (var category in Model.Categories)
+                            {
+                                @if (product.category_id == category.category_id)
+                                {
+                                    <h2>@category.category_name_en</h2>
+                                    break;
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            <h1> <span>@product.product_code</span> | @product.product_name_ar</h1>
+                            @foreach (var category in Model.Categories)
+                            {
+                                @if (product.category_id == category.category_id)
+                                {
+                                    <h2>@category.category_name_ar</h2>
+                                    break;
+                                }
+
+                            }
+
+                        }
+                    </div>
+                    <div class="product__detail--product-content--desc">
+                        @if (ViewBag.Language == "tr-TR")
+                        {
+                            <p>
+                                @product.product_desc
+                            </p>
+                        }
+                        else if (ViewBag.Language == "en-US")
+                        {
+                            <p>
+                                @product.product_desc_en
+                            </p>
+                        }
+                        else
+                        {
+                            <p>
+                                @product.product_desc_ar
+                            </p>
+                        }
+
+                    </div>
+                    <div class="product__detail--product-content--box-info  mt-4">
+                        <div class="row">
+                            <div class="product__detail--product-content--info--heading">
+                                <p>@_localization.Getkey("box-info")</p>
+                            </div>
+                            <div class="col-xl-4 col-6">
+                                <div class="product__detail--product-content--box-info--box">
+                                    <div class="product__detail--product-content--box-info--box--icon">
+                                        <i class="bi bi-123"></i>
+                                    </div>
+                                    <div class="product__detail--product-content--box-info--box--text">
+                                        <p>@_localization.Getkey("text-per")</p>
+                                        <span>@product.product_info_piece</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-6">
+                                <div class="product__detail--product-content--box-info--box">
+                                    <div class="product__detail--product-content--box-info--box--icon">
+                                        <i class="bi bi-box-seam"></i>
+
+                                    </div>
+                                    <div class="product__detail--product-content--box-info--box--text">
+                                        <p>@_localization.Getkey("text-weight")</p>
+                                        <span>@product.product_info_box_weight</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 mt-xl-0 mt-3">
+                                <div class="product__detail--product-content--box-info--box">
+                                    <div class="product__detail--product-content--box-info--box--icon">
+                                        <i class="bi bi-rulers"></i>
+
+                                    </div>
+                                    <div class="product__detail--product-content--box-info--box--text">
+                                        <p>@_localization.Getkey("text-meters")</p>
+                                        <span> @product.product_info_box_measurement</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 mt-3">
+                                <div class="product__detail--product-content--box-info--box">
+                                    <div class="product__detail--product-content--box-info--box--icon">
+                                        <i class="bi bi-truck"></i>
+
+                                    </div>
+                                    <div class="product__detail--product-content--box-info--box--text">
+                                        <p>@_localization.Getkey("text-delivery-info")</p>
+                                        @if (ViewBag.Language == "tr-TR")
+                                        {
+                                            <span>
+                                                @product.product_info_shipment
+                                            </span>
+                                        }
+                                        else if (ViewBag.Language == "en-US")
+                                        {
+                                            <span>
+                                                @product.product_info_shipment_en
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span>
+                                                @product.product_info_shipment_ar
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <img src="~/img/products/saki.webp" class="img-fluid" alt="">
+                        <div class="row">
+                            <div class="col-xl-12 mt-2">
+                                <div class="product__detail--product-content--info--heading">
+                                    <p>@_localization.Getkey("text-colors")</p>
+                                </div>
+                                <div class="product__detail--product-content--box-info--color">
+                                    <div class="product__detail--product-content--box-info--color--item">
+                                        <div class="black"></div>
+                                        <p>@_localization.Getkey("text-black")</p>
+                                    </div>
+                                    <div class="product__detail--product-content--box-info--color--item">
+                                        <div class="white"></div>
+                                        <p>@_localization.Getkey("text-white")</p>
+                                    </div>
+                                    <div class="product__detail--product-content--box-info--color--item">
+                                        <div class="half-white"></div>
+                                        <p>@_localization.Getkey("text-halfwhite")</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <img src="~/img/products/saki.webp" class="img-fluid" alt="">
+                        <div class="row">
+                            <div class="col-xl-12 mt-2">
+                                <div class="product__detail--product-content--info--heading">
+                                    <p>@_localization.Getkey("text-price-info")</p>
+                                </div>
+                                <div class="product__detail--product-content--box-info--price">
+                                    <span>@_localization.Getkey("text-total-price-info")</span>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <img src="~/img/products/saki.webp" class="img-fluid" alt="">
+                        <div class="row">
+                            <div class="col-xl-12 mt-2">
+                                <div class="product__detail--product-content--info--heading">
+                                    <p>@_localization.Getkey("text-contact-info")</p>
+                                </div>
+                                <div class="product__detail--product-content--box-info--contact">
+                                    <a href="https://wa.me/905324968590" class="w-100 text-decoration-none" target="_blank">
+                                        <div class="product__detail--product-content--box-info--contact--whatsapp contact-button w-100">
+                                            <i class="fa-brands fa-whatsapp"></i>
+                                            <p>Whatsapp</p>
+                                        </div>
+                                    </a>
+                                    <a href="tel:05324968590" class="w-100 text-decoration-none">
+                                        <div class="product__detail--product-content--box-info--contact--tel contact-button w-100">
+                                            <i class="fa-light fa-phone"></i>
+                                            <p>@_localization.Getkey("text-phone")</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-6">
-            <div class="product__detail--product-content">
-                <div class="product__detail--product-content--heading">
-                    <h1> <span>MAU 45</span> | Elbise Askısı</h1>
-                    <h2>Elbise Askıları</h2>
-                </div>
-                <div class="product__detail--product-content--desc">
-                    <p>
-                        Kodu MAU30-35 cm eninde olan üst giyim plastik çocuk askısı iki ayrı ölçüden oluşmaktadır. Ölçüleri 30cm
-                        ve 35cm dir. MAU30 3-6 yaş arası, MAU35 6-12 yaş arası kullanılmaktadır. Toptan satışı istediğiniz adede
-                        göre fiyatlandırılmaktadır.
-                    </p>
-                </div>
-                <div class="product__detail--product-content--box-info  mt-4">
-                    <div class="row">
-                        <div class="product__detail--product-content--info--heading">
-                            <p>@_localization.Getkey("box-info")</p>
-                        </div>
-                        <div class="col-xl-4 col-6">
-                            <div class="product__detail--product-content--box-info--box">
-                                <div class="product__detail--product-content--box-info--box--icon">
-                                    <i class="bi bi-123"></i>
-                                </div>
-                                <div class="product__detail--product-content--box-info--box--text">
-                                    <p>@_localization.Getkey("text-per")</p>
-                                    <span>592</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-6">
-                            <div class="product__detail--product-content--box-info--box">
-                                <div class="product__detail--product-content--box-info--box--icon">
-                                    <i class="bi bi-box-seam"></i>
-
-                                </div>
-                                <div class="product__detail--product-content--box-info--box--text">
-                                    <p>@_localization.Getkey("text-weight")</p>
-                                    <span>19.5</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 mt-xl-0 mt-3">
-                            <div class="product__detail--product-content--box-info--box">
-                                <div class="product__detail--product-content--box-info--box--icon">
-                                    <i class="bi bi-rulers"></i>
-
-                                </div>
-                                <div class="product__detail--product-content--box-info--box--text">
-                                    <p>@_localization.Getkey("text-meters")</p>
-                                    <span> 63x41x56</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-12 mt-3">
-                            <div class="product__detail--product-content--box-info--box">
-                                <div class="product__detail--product-content--box-info--box--icon">
-                                    <i class="bi bi-truck"></i>
-
-                                </div>
-                                <div class="product__detail--product-content--box-info--box--text">
-                                    <p>@_localization.Getkey("text-delivery-info")</p>
-                                    <span>
-                                        PTT, Ambar ve Kargo firmaları ile gönderim sağlanmaktadır. Gönderim hızı ve maliyeti
-                                        seçeceğiniz
-                                        gönderim şekline göre değişiklik gösterecektir.
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xl-12 mt-2">
-                            <div class="product__detail--product-content--info--heading">
-                                <p>@_localization.Getkey("text-colors")</p>
-                            </div>
-                            <div class="product__detail--product-content--box-info--color">
-                                <div class="product__detail--product-content--box-info--color--item">
-                                    <div class="black"></div>
-                                    <p>@_localization.Getkey("text-black")</p>
-                                </div>
-                                <div class="product__detail--product-content--box-info--color--item">
-                                    <div class="white"></div>
-                                    <p>@_localization.Getkey("text-white")</p>
-                                </div>
-                                <div class="product__detail--product-content--box-info--color--item">
-                                    <div class="half-white"></div>
-                                    <p>@_localization.Getkey("text-halfwhite")</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xl-12 mt-2">
-                            <div class="product__detail--product-content--info--heading">
-                                <p>@_localization.Getkey("text-price-info")</p>
-                            </div>
-                            <div class="product__detail--product-content--box-info--price">
-                                <span>@_localization.Getkey("text-total-price-info")</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xl-12 mt-2">
-                            <div class="product__detail--product-content--info--heading">
-                                <p>@_localization.Getkey("text-contact-info")</p>
-                            </div>
-                            <div class="product__detail--product-content--box-info--contact">
-                                <div class="product__detail--product-content--box-info--contact--whatsapp contact-button">
-                                    <i class="fa-brands fa-whatsapp"></i>
-                                    <p>Whatsapp</p>
-                                </div>
-                                <div class="product__detail--product-content--box-info--contact--tel contact-button">
-                                    <i class="fa-light fa-phone"></i>
-                                    <p>@_localization.Getkey("text-phone")</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    }
 </div>
 <div class="container">
     <div class="row mb-4">
         <div class="product__detail--product-content--info--heading">
-            <p>@_localization.Getkey("text-same-products")</p>
+            <p class="main-heading fw-semibold">@_localization.Getkey("text-same-products")</p>
         </div>
-        <div class="col-xl-3 col-6 mb-lg-0 mb-2 p-0 px-1">
-            <div class="product">
-                <a href="#" class="text-decoration-none">
-                    <div class="product__images">
-                        <img src="~/img/products/aski.webp" class="img-fluid" alt="">
-                    </div>
-                    <div class="product__color">
-                        <div class="product__color--item black" title="Siyah">
+        @foreach (var product in Model.Products.Take(4))
+        {
+            <div class="col-xl-3 col-6 mb-lg-0 mb-2 p-0 px-1">
+                <div class="product">
+                    <a href="@Url.Action("ProductDetail", "Product", new { productId = product.product_id })" class="text-decoration-none">
+                        <div class="product__images">
+                            <img src="~/img/products/@product.product_img_1" class="img-fluid" alt="@product.product_name">
                         </div>
-                        <div class="product__color--item white" title="Beyaz">
+                        <div class="product__color">
+                            <div class="product__color--item black" title="Siyah">
+                            </div>
+                            <div class="product__color--item white" title="Beyaz">
+                            </div>
+                            <div class="product__color--item half-white" title="Kırık Beyaz">
+                            </div>
                         </div>
-                        <div class="product__color--item half-white" title="Kırık Beyaz">
-                        </div>
-                    </div>
-                    <div class="product__content">
-                        <h1>Üst giyim elbise askısı</h1>
-                        <div class="product__content--category">
-                            @_localization.Getkey("home-product-category") :
-                        </div>
-                        <div class="product__content--model d-flex">
-                            <span>@_localization.Getkey("home-product-code") :</span> <h2>T43</h2>
-                        </div>
-                    </div>
-                </a>
+                        @if (ViewBag.Language == "tr-TR")
+                        {
+                            <div class="product__content">
+                                <h1>@product.product_name</h1>
+                                @foreach (var category in Model.Categories)
+                                {
+                                    @if (product.category_id == category.category_id)
+                                    {
+                                        <div class="product__content--category">
+                                            @_localization.Getkey("home-product-category") : @category.category_name
+                                        </div>
+                                        break;
+                                    }
+                                }
+                                <div class="product__content--model d-flex">
+                                    <span>@_localization.Getkey("home-product-code") : </span>
+                                    <h2>@product.product_code</h2>
+                                </div>
+                            </div>
+                        }
+                        else if (ViewBag.Language == "en-US")
+                        {
+                            <div class="product__content">
+                                <h1>@product.product_name_en</h1>
+                                @foreach (var category in Model.Categories)
+                                {
+                                    @if (product.category_id == category.category_id)
+                                    {
+                                        <div class="product__content--category">
+                                            @_localization.Getkey("home-product-category") : @category.category_name_en
+                                        </div>
+                                        break;
+                                    }
+                                }
+                                <div class="product__content--model d-flex">
+                                    <span>@_localization.Getkey("home-product-code") : </span>
+                                    <h2>@product.product_code</h2>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="product__content">
+                                <h1>@product.product_name_ar</h1>
+                                @foreach (var category in Model.Categories)
+                                {
+                                    @if (product.category_id == category.category_id)
+                                    {
+                                        <div class="product__content--category">
+                                            @_localization.Getkey("home-product-category") : @category.category_name_ar
+                                        </div>
+                                        break;
+                                    }
+                                }
+                                <div class="product__content--model d-flex">
+                                    <span>@_localization.Getkey("home-product-code") : </span>
+                                    <h2>@product.product_code</h2>
+                                </div>
+                            </div>}
+
+                    </a>
+                </div>
             </div>
-        </div>
-        <div class="col-xl-3 col-6 mb-lg-0 mb-2 p-0 px-1">
-            <div class="product">
-                <a href="#" class="text-decoration-none">
-                    <div class="product__images">
-                        <img src="~/img/products/aski.webp" class="img-fluid" alt="">
-                    </div>
-                    <div class="product__color">
-                        <div class="product__color--item black" title="Siyah">
-                        </div>
-                        <div class="product__color--item white" title="Beyaz">
-                        </div>
-                        <div class="product__color--item half-white" title="Kırık Beyaz">
-                        </div>
-                    </div>
-                    <div class="product__content">
-                        <h1>Üst giyim elbise askısı</h1>
-                        <div class="product__content--category">
-                            @_localization.Getkey("home-product-category") :
-                        </div>
-                        <div class="product__content--model d-flex">
-                            <span>@_localization.Getkey("home-product-code") :</span> <h2>T43</h2>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-xl-3 col-6 mb-lg-0 mb-2 p-0 px-1">
-            <div class="product">
-                <a href="#" class="text-decoration-none">
-                    <div class="product__images">
-                        <img src="~/img/products/aski.webp" class="img-fluid" alt="">
-                    </div>
-                    <div class="product__color">
-                        <div class="product__color--item black" title="Siyah">
-                        </div>
-                        <div class="product__color--item white" title="Beyaz">
-                        </div>
-                        <div class="product__color--item half-white" title="Kırık Beyaz">
-                        </div>
-                    </div>
-                    <div class="product__content">
-                        <h1>Üst giyim elbise askısı</h1>
-                        <div class="product__content--category">
-                            @_localization.Getkey("home-product-category") :
-                        </div>
-                        <div class="product__content--model d-flex">
-                            <span>@_localization.Getkey("home-product-code") :</span> <h2>T43</h2>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-xl-3 col-6 mb-lg-0 mb-2 p-0 px-1">
-            <div class="product">
-                <a href="#" class="text-decoration-none">
-                    <div class="product__images">
-                        <img src="~/img/products/aski.webp" class="img-fluid" alt="">
-                    </div>
-                    <div class="product__color">
-                        <div class="product__color--item black" title="Siyah">
-                        </div>
-                        <div class="product__color--item white" title="Beyaz">
-                        </div>
-                        <div class="product__color--item half-white" title="Kırık Beyaz">
-                        </div>
-                    </div>
-                    <div class="product__content">
-                        <h1>Üst giyim elbise askısı</h1>
-                        <div class="product__content--category">
-                            @_localization.Getkey("home-product-category") :
-                        </div>
-                        <div class="product__content--model d-flex">
-                            <span>@_localization.Getkey("home-product-code") :</span> <h2>T43</h2>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
+        }
     </div>
 </div>

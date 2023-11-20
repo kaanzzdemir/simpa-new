@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
@@ -13,7 +14,7 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<SimpaDbContext>(options =>
-    options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=Simpaski_db;Trusted_Connection=True;"));
+    options.UseSqlServer("Server=DESKTOP-8CMRC0E\\SQLEXPRESS;Database=Simpaski_db;Trusted_Connection=True;"));
 
 builder.Services.AddSingleton<LanguageService>();
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
@@ -23,6 +24,8 @@ builder.Services.AddMvc().AddViewLocalization().AddDataAnnotationsLocalization(o
         var assemblyName = new AssemblyName(typeof(SharedResource).GetTypeInfo().Assembly.FullName);
         return factory.Create(nameof(SharedResource), assemblyName.Name);
     });
+
+
 builder.Services.Configure<RequestLocalizationOptions>(options => {
     var supportCulture = new List<CultureInfo>
     {
@@ -55,11 +58,15 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "productDetail",
+    pattern: "Product/ProductDetail",
+    defaults: new { controller = "Product", action = "ProductDetail" });
 
 app.Run();

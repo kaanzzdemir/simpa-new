@@ -1,4 +1,5 @@
-﻿@model List<SimPlastik.Models.Entity.Contact>
+﻿@model SimPlastik.Models.ViewModels.LayoutViewModel
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 px-0">
@@ -12,13 +13,13 @@
 <div class="container">
     <div class="row contact__page">
         <div class="col-xl-5 my-5 px-5">
-            @foreach (var item in Model)
+            @foreach (var item in Model.Contacts)
             {
                 <div class="contact__page--item">
                     <img src="img/company-tel.png" class="img-fluid" alt="iletisim-telefon">
                     <div class="contact__page--item--text">
                         <a href="tel:@item.number">
-                            <h3>@_localization.Getkey("text-phone")</h3>
+                            <h3 class="main-heading">@_localization.Getkey("text-phone")</h3>
                             <p>@item.number</p>
                         </a>
                     </div>
@@ -27,7 +28,7 @@
                     <img src="img/company-mail.png" class="img-fluid" alt="iletisim-telefon">
                     <div class="contact__page--item--text">
                         <a href="mailto:@item.mail">
-                            <h3>@_localization.Getkey("text-mail")</h3>
+                            <h3 class="main-heading">@_localization.Getkey("text-mail")</h3>
                             <p>@item.mail</p>
                         </a>
                     </div>
@@ -36,14 +37,14 @@
                     <img src="img/company-pin.png" class="img-fluid" alt="iletisim-telefon">
                     <div class="contact__page--item--text">
                         <a href="#">
-                            <h3>@_localization.Getkey("text-address")</h3>
+                            <h3 class="main-heading">@_localization.Getkey("text-address")</h3>
                             <p>@item.address</p>
                         </a>
                     </div>
                 </div>
                 <div class="contact__page--item">
                     <div class="contact__page--item--text">
-                        <h3 class="my-3 fw-semibold d-none">@_localization.Getkey("text-other-contacts")</h3>
+                        <h3 class="my-3 fw-semibold d-none  main-heading">@_localization.Getkey("text-other-contacts")</h3>
                         <div class="d-flex align-items-center mb-2 other-numbers">
                             <img src="img/languages/en.png" class="img-fluid" width="30" alt="ingilizce-iletisim">
                             <a href="#">
@@ -69,7 +70,7 @@
             }
         </div>
         <div class="col-xl-7 company__contact--form" style="height: 400px;">
-            <h1 class="h4">@_localization.Getkey("home-form-heading-1")</h1>
+            <h1 class="h4 main-heading" style="padding-left:0!important;">@_localization.Getkey("home-form-heading-1")</h1>
             <h2 class="h6 fw-light">@_localization.Getkey("home-form-heading-2")</h2>
             <input class="form-control" placeholder="@_localization.Getkey("text-name")" type="text">
             <input class="form-control" placeholder="@_localization.Getkey("text-mail-or-phone")" type="text">
@@ -82,7 +83,7 @@
 
 <script>
     var elements = document.querySelectorAll(".other-numbers a p");
- 
+
     elements.forEach(function (element) {
         var isNull = element.innerHTML.trim() === ""; // innerHTML'i alırken trim() kullanarak başındaki ve sonundaki boşlukları temizler
         if (isNull) {

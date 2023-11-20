@@ -1,4 +1,5 @@
-﻿@model List<SimPlastik.Models.Entity.About>
+﻿@model SimPlastik.Models.ViewModels.LayoutViewModel
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 px-0">
@@ -12,27 +13,38 @@
 <div class="container">
     <div class="row my-5 about__page">
         @*<div class="col-xl-3">
-            <ul class="about__page--list">
-                <a href="#">
-                <li>@_localization.Getkey("text-institutional")</li>
-                </a>
-                <a href="#">
-                <li>@_localization.Getkey("sidebar-vision-mission")</li>
-                </a>
-                <a href="#">
-                <li>@_localization.Getkey("sidebar-policy")</li>
-                </a>
-            </ul>
-        </div>*@
+                <ul class="about__page--list">
+                    <a href="#">
+                    <li>@_localization.Getkey("text-institutional")</li>
+                    </a>
+                    <a href="#">
+                    <li>@_localization.Getkey("sidebar-vision-mission")</li>
+                    </a>
+                    <a href="#">
+                    <li>@_localization.Getkey("sidebar-policy")</li>
+                    </a>
+                </ul>
+            </div>*@
         <div class="col-xl-12">
             <div class="about__page--content">
-                @foreach (var item in Model.ToList())
+                @foreach (var item in Model.Abouts)
                 {
-                    <h1 class="h1">
+                    <h1 class="h1 main-heading" style=" font-size: 30px !important; padding-left: 0 !important;">
                         @_localization.Getkey("text-about-simpa")
                     </h1>
                     <p>
-                       @item.about_text
+                        @if (ViewBag.Language == "tr-TR")
+                        {
+                            @item.about_text
+                        }
+                        else if (ViewBag.Language == "en-US")
+                        {
+                            @item.about_eng_text
+                        }
+                        else
+                        {
+                            @item.about_ar_text
+                        }
                     </p>
                 }
             </div>

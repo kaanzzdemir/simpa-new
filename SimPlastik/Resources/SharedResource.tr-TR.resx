@@ -156,6 +156,9 @@
   <data name="home-title" xml:space="preserve">
     <value>Anasayfa</value>
   </data>
+  <data name="item-not-found" xml:space="preserve">
+    <value>Bu kategoriye ait hiç ürün bulunamadı.</value>
+  </data>
   <data name="language" xml:space="preserve">
     <value>Aktif Dil</value>
   </data>
@@ -207,8 +210,14 @@
   <data name="text-all-categories" xml:space="preserve">
     <value>Tüm Kategoriler</value>
   </data>
+  <data name="text-all-products" xml:space="preserve">
+    <value>Tüm Ürünler</value>
+  </data>
   <data name="text-black" xml:space="preserve">
     <value>Siyah</value>
+  </data>
+  <data name="text-categories" xml:space="preserve">
+    <value>Kategoriler</value>
   </data>
   <data name="text-colors" xml:space="preserve">
     <value>Renkler</value>
@@ -233,6 +242,9 @@
   </data>
   <data name="text-institutional" xml:space="preserve">
     <value>Kurumsal</value>
+  </data>
+  <data name="text-links" xml:space="preserve">
+    <value>Linkler</value>
   </data>
   <data name="text-mail" xml:space="preserve">
     <value>Mail</value>

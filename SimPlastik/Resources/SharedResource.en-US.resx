@@ -156,6 +156,9 @@
   <data name="home-title" xml:space="preserve">
     <value>Home Page</value>
   </data>
+  <data name="item-not-found" xml:space="preserve">
+    <value>No products found in this category.</value>
+  </data>
   <data name="language" xml:space="preserve">
     <value>Active Language</value>
   </data>
@@ -207,8 +210,14 @@
   <data name="text-all-categories" xml:space="preserve">
     <value>All Categories</value>
   </data>
+  <data name="text-all-products" xml:space="preserve">
+    <value>All Products</value>
+  </data>
   <data name="text-black" xml:space="preserve">
     <value>Black</value>
+  </data>
+  <data name="text-categories" xml:space="preserve">
+    <value>Categories</value>
   </data>
   <data name="text-colors" xml:space="preserve">
     <value>Colors</value>
@@ -233,6 +242,9 @@
   </data>
   <data name="text-institutional" xml:space="preserve">
     <value>Institutional</value>
+  </data>
+  <data name="text-links" xml:space="preserve">
+    <value>Links</value>
   </data>
   <data name="text-mail" xml:space="preserve">
     <value>Mail</value>

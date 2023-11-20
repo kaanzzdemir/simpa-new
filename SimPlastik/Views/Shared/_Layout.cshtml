@@ -15,6 +15,20 @@
     <link rel="stylesheet" href="~/css/site.css">
     <link rel="stylesheet" href="~/css/slick.css">
 </head>
+<style>
+    footer .col {
+        justify-content: start;
+    }
+
+        footer .col li a {
+            font-size: 13px;
+            transition: all .1s;
+        }
+
+            footer .col li a:hover {
+                margin-left: 3px;
+            }
+</style>
 <body>
     <div class="container-fluid px-0">
         <div class="top__navbar">
@@ -26,18 +40,22 @@
                         <span>@_localization.Getkey("select-language-button")</span>
                     </button>
                 </div>
-                <div class="top__navbar--tel">
-                    <a href="tel:">
-                        <i class="fa-solid fa-mobile-screen-button"></i>
-                        <span></span>
-                    </a>
-                </div>
-                <div class="top__navbar--mail">
-                    <a href="mailto:">
-                        <i class="bi bi-envelope"></i>
-                        <span></span>
-                    </a>
-                </div>
+                @foreach (var contact in Model.Contacts)
+                {
+                    <div class="top__navbar--tel">
+                        <a href="tel:@contact.number">
+                            <i class="fa-solid fa-mobile-screen-button"></i>
+                            <span>@contact.number</span>
+                        </a>
+                    </div>
+                    <div class="top__navbar--mail">
+                        <a href="mailto:@contact.mail">
+                            <i class="bi bi-envelope"></i>
+                            <span>@contact.mail</span>
+                        </a>
+                    </div>
+                }
+
             </div>
         </div>
     </div>
@@ -58,35 +76,69 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 p-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">@_localization.Getkey("menu-home")<i class="fa-solid fa-house"></i></a>
+                            <a class="nav-link" aria-current="page">@_localization.Getkey("menu-home")<i class="fa-solid fa-house"></i></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/Product/ProductList">@_localization.Getkey("menu-all-products")<i class="fa-solid fa-box-open"></i></a>
                         </li>
-                        @foreach (var topCategory in Model.TopCategories)
+                        @foreach (var topCategory in @ViewBag.ViewModel.TopCategories)
                         {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-link" href="#" role="button" data-bs-toggle="elbise-askilari"
-                                   aria-expanded="false" data-target="elbise-askilari">
-                                    @topCategory.top_category_name
-                                </a>
-                                <ul class="dropdown-menu" id="elbise-askilari">
-                                    @foreach (var category in Model.Categories)
-                                    {
-                                        <li><a class="dropdown-item" href="#">@category.category_name</a></li>
-                                    }
-                                </ul>
-                            </li>
+
+                            @if (ViewBag.Language == "tr-TR")
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-link" role="button" data-bs-toggle="@topCategory.top_category_name.ToLower().Replace(" ", "-")"
+                                       aria-expanded="false" data-target="@topCategory.top_category_name.ToLower().Replace(" ", "-")">
+                                        @topCategory.top_category_name
+                                    </a>
+                                    <ul class="dropdown-menu" id="@topCategory.top_category_name.ToLower().Replace(" ", "-")">
+                                        @foreach (var category in Model.Categories.Where(c => c.top_category_id == topCategory.top_category_id))
+                                        {
+                                            <li><a class="dropdown-item" href="@Url.Action("ProductListByCategory", "Product", new { categoryId = category.category_id })">@category.category_name</a></li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                            else if (ViewBag.Language == "en-US")
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-link" role="button" data-bs-toggle="@topCategory.top_category_name.ToLower().Replace(" ", "-")"
+                                       aria-expanded="false" data-target="@topCategory.top_category_name.ToLower().Replace(" ", "-")">
+                                        @topCategory.top_category_name_en
+                                    </a>
+                                    <ul class="dropdown-menu" id="@topCategory.top_category_name.ToLower().Replace(" ", "-")">
+                                        @foreach (var category in Model.Categories.Where(c => c.top_category_id == topCategory.top_category_id))
+                                        {
+                                            <li><a class="dropdown-item" href="@Url.Action("ProductListByCategory", "Product", new { categoryId = category.category_id })">@category.category_name_en</a></li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-link" role="button" data-bs-toggle="@topCategory.top_category_name.ToLower().Replace(" ", "-")"
+                                       aria-expanded="false" data-target="@topCategory.top_category_name.ToLower().Replace(" ", "-")">
+                                        @topCategory.top_category_name_ar
+                                    </a>
+                                    <ul class="dropdown-menu" id="@topCategory.top_category_name.ToLower().Replace(" ", "-")">
+                                        @foreach (var category in Model.Categories.Where(c => c.top_category_id == topCategory.top_category_id))
+                                        {
+                                            <li><a class="dropdown-item" href="@Url.Action("ProductListByCategory", "Product", new { categoryId = category.category_id })">@category.category_name_ar</a></li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
                         }
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-link" href="#" role="button" data-bs-toggle="dropdown-menu-1"
+                            <a class="nav-link dropdown-link" role="button" data-bs-toggle="dropdown-menu-1"
                                aria-expanded="false" data-target="dropdown-menu-2">
                                 @_localization.Getkey("menu-inst")
                             </a>
                             <ul class="dropdown-menu" id="dropdown-menu-2">
-                                <li><a class="dropdown-item" href="#">@_localization.Getkey("sidebar-about")</a></li>
-                                <li><a class="dropdown-item" href="#">@_localization.Getkey("sidebar-vision-mission")</a></li>
-                                <li><a class="dropdown-item" href="#">@_localization.Getkey("sidebar-policy")</a></li>
+                                <li><a class="dropdown-item">@_localization.Getkey("sidebar-about")</a></li>
+                                <li><a class="dropdown-item">@_localization.Getkey("sidebar-vision-mission")</a></li>
+                                <li><a class="dropdown-item">@_localization.Getkey("sidebar-policy")</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -126,89 +178,57 @@
                             <div class="col-3">
                                 <img src="~/img/desktop-menu/menu.jpg" class="w-100 h-100" alt="plastik-askilar">
                             </div>
-                            <div class="col-3">
-                                <ul>
-                                    <h1>Mağaza Askıları</h1>
-                                    <li>
-                                        <h2>
-                                            <a href="/Product/ProductList">Üst Giyim Askıları</a>
-                                        </h2>
-                                    </li>
-                                    <li>
-                                        <h2>
-                                            <a href="#">alt giyim askıları</a>
-                                        </h2>
-                                    </li>
-                                    <li>
-                                        <h2>
-                                            <a href="#">çocuk askıları</a>
-                                        </h2>
-                                    </li>
-                                    <li>
-                                        <h2>
-                                            <a href="#">ceket askıları</a>
-                                        </h2>
-                                    </li>
-                                    <li>
-                                        <h2>
-                                            <a href="#">takım & kurutemizleme askıları</a>
-                                        </h2>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-3">
-                                <ul>
-                                    <h1>Showroom Askıları</h1>
-                                    <li>
-                                        <h2>
-                                            <a href="#">Üst Giyim Askıları</a>
-                                        </h2>
-                                    </li>
-                                    <li>
-                                        <h2>
-                                            <a href="#">flok kaplamalı askılar</a>
-                                        </h2>
-                                    </li>
-                                    <li>
-                                        <h2>
-                                            <a href="#">tahta görünümlü plastik askılar</a>
-                                        </h2>
-                                    </li>
-                                    <li>
-                                        <h2>
-                                            <a href="#">mağaza askıları</a>
-                                        </h2>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-3">
-                                <ul>
-                                    <h1>Diğer Ürünler</h1>
-                                    <li>
-                                        <h2>
-                                            <a href="#">Kılçıklı çorap askısı</a>
-                                        </h2>
-                                    </li>
-                                    <li>
-                                        <h2>
-                                            <a href="#">geçmeli çorap askısı</a>
-                                        </h2>
-                                    </li>
-                                    <li>
-                                        <h2>
-                                            <a href="#">Patik askısı</a>
-                                        </h2>
-                                    </li>
-                                    <li>
-                                        <h2>
-                                            <a href="#">Kumaşlar</a>
-                                        </h2>
-                                    </li>
-                                </ul>
-                            </div>
+                            @foreach (var top_categories in @ViewBag.ViewModel.TopCategories)
+                            {
+                                <div class="col-3">
+                                    <ul>
+                                        @if (ViewBag.Language == "tr-TR")
+                                        {
+                                            <h1>@top_categories.top_category_name</h1>
+                                            @foreach (var category in Model.Categories.Where(x => x.top_category_id == top_categories.top_category_id))
+                                            {
+                                                <li>
+                                                    <h2>
+                                                        <a href="@Url.Action("ProductListByCategory", "Product", new { categoryId = category.category_id })">@category.category_name</a>
+                                                    </h2>
+                                                </li>
+                                            }
+                                        }
+                                        else if (ViewBag.Language == "en-US")
+                                        {
+                                            <h1>@top_categories.top_category_name_en</h1>
+                                            @foreach (var category in Model.Categories.Where(x => x.top_category_id == top_categories.top_category_id))
+                                            {
+                                                <li>
+                                                    <h2>
+                                                        <a href="@Url.Action("ProductListByCategory", "Product", new { categoryId = category.category_id })">@category.category_name_en</a>
+                                                    </h2>
+                                                </li>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <h1>@top_categories.top_category_name_ar</h1>
+                                            @foreach (var category in Model.Categories.Where(x => x.top_category_id == top_categories.top_category_id))
+                                            {
+                                                <li>
+                                                    <h2>
+                                                        <a href="@Url.Action("ProductListByCategory", "Product", new { categoryId = category.category_id })">@category.category_name_ar</a>
+                                                    </h2>
+                                                </li>
+                                            }
+                                        }
+
+                                    </ul>
+                                </div>
+                            }
+
                         </div>
                         <div class="row">
                             <div class="offset-xl-3 col-9 features">
+                                <div class="features-item">
+                                    <a href="/Product/ProductList" class="text-decoration-none main-heading" style="font-weight:500;padding-left:0!important;margin-left:-10px;letter-spacing:0;">@_localization.Getkey("text-all-products")</a>
+                                </div>
                                 <div class="features-item">
                                     <i class="fa-solid fa-truck-ramp-box"></i>
                                     <span>@_localization.Getkey("sidebar-fast-delivery")</span>
@@ -235,11 +255,46 @@
                 <a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">
                     <img src="~/img/logo_yazisiz.png" class="img-fluid" alt="simpa-logo">
                 </a>
-                <p class="mb-3">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut inventore ab eligendi praesentium
-                    qui suscipit doloremque nulla laudantium iusto delectus ipsam.
+                <p class="mb-3" style=" font-size: 13px; /* font-weight: 600; */ text-align: justify; color: #7f7f7f;">
+                    @foreach (var about in Model.Abouts)
+                    {
+                        if (ViewBag.Language == "tr-TR")
+                        {
+                            if (about.about_text.Length > 120)
+                            {
+                                @about.about_text.Substring(0, 120)
+                            }
+                            else
+                            {
+                                @about.about_text;
+                            }
+                        }
+                        else if (ViewBag.Language == "en-US")
+                        {
+                            if (about.about_text.Length > 120)
+                            {
+                                @about.about_eng_text.Substring(0, 120)
+                            }
+                            else
+                            {
+                                @about.about_eng_text;
+                            }
+                        }
+                        else
+                        {
+                            if (about.about_text.Length > 120)
+                            {
+                                @about.about_ar_text.Substring(0, 120)
+                            }
+                            else
+                            {
+                                @about.about_ar_text;
+                            }
+                        }
+
+                    }
                 </p>
-                <p class="text-body-secondary">Kaan Özdemir © 2023</p>
+                <p class="text-body-secondary" style="text-transform: uppercase; font-size: 15px; letter-spacing: 1px; font-weight: 500; color: #777;">SİMPA PLASTİK © 2023</p>
             </div>
 
             <div class="col mb-3">
@@ -247,32 +302,62 @@
             </div>
 
             <div class="col mb-3">
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                <ul class="nav flex-column w-100">
+                    <h1 style="text-transform: uppercase; font-size: 15px; letter-spacing: 1px; font-weight: 500; color: #777;">@_localization.Getkey("text-categories")</h1>
+                    <hr />
+                    @foreach (var category in Model.Categories.Take(5))
+                    {
+
+
+                        @if (ViewBag.Language == "tr-TR")
+                        {
+                            <li class="nav-item mb-2" style=""><a href="@Url.Action("ProductListByCategory", "Product", new { categoryId = category.category_id })" class="nav-link p-0 text-body-secondary">@category.category_name</a></li>
+                        }
+                        else if (ViewBag.Language == "en-US")
+                        {
+                            <li class="nav-item mb-2" style=""><a href="@Url.Action("ProductListByCategory", "Product", new { categoryId = category.category_id })" class="nav-link p-0 text-body-secondary">@category.category_name_en</a></li>
+                        }
+                        else
+                        {
+                            <li class="nav-item mb-2" style=""><a href="@Url.Action("ProductListByCategory", "Product", new { categoryId = category.category_id })" class="nav-link p-0 text-body-secondary">@category.category_name_ar</a></li>
+                        }
+
+                    }
                 </ul>
             </div>
 
             <div class="col mb-3">
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                <ul class="nav flex-column w-100">
+                    <h1 style="text-transform: uppercase; font-size: 15px; letter-spacing: 1px; font-weight: 500; color: #777;">@_localization.Getkey("text-categories")</h1>
+                    <hr />
+                    @foreach (var category in Model.Categories.Skip(5).Take(5))
+                    {
+
+                        @if (ViewBag.Language == "tr-TR")
+                        {
+                            <li class="nav-item mb-2" style=""><a href="@Url.Action("ProductListByCategory", "Product", new { categoryId = category.category_id })" class="nav-link p-0 text-body-secondary">@category.category_name</a></li>
+                        }
+                        else if (ViewBag.Language == "en-US")
+                        {
+                            <li class="nav-item mb-2" style=""><a href="@Url.Action("ProductListByCategory", "Product", new { categoryId = category.category_id })" class="nav-link p-0 text-body-secondary">@category.category_name_en</a></li>
+                        }
+                        else
+                        {
+                            <li class="nav-item mb-2" style=""><a href="@Url.Action("ProductListByCategory", "Product", new { categoryId = category.category_id })" class="nav-link p-0 text-body-secondary">@category.category_name_ar</a></li>
+                        }
+
+                    }
                 </ul>
             </div>
 
             <div class="col mb-3">
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                <ul class="nav flex-column w-100">
+                    <h1 style="text-transform: uppercase; font-size: 15px; letter-spacing: 1px; font-weight: 500; color: #777;">@_localization.Getkey("text-links")</h1>
+                    <hr />
+                    <li class="nav-item mb-2"><a href="/Home" class="nav-link p-0 text-body-secondary">@_localization.Getkey("text-home")</a></li>
+                    <li class="nav-item mb-2"><a href="/About" class="nav-link p-0 text-body-secondary">@_localization.Getkey("text-institutional")</a></li>
+                    <li class="nav-item mb-2"><a href="/Product/ProductList" class="nav-link p-0 text-body-secondary">@_localization.Getkey("text-all-products")</a></li>
+                    <li class="nav-item mb-2"><a href="/Contact" class="nav-link p-0 text-body-secondary">@_localization.Getkey("text-contact")</a></li>
                 </ul>
             </div>
         </footer>
@@ -358,6 +443,8 @@
                 }
             };
         }</script>
+
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

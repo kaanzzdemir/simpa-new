@@ -29,12 +29,16 @@ namespace SimPlastik.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("about_id"), 1L, 1);
 
+                    b.Property<string>("about_ar_text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("about_eng_text")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("about_text")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("about_title")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("about_id");
@@ -51,7 +55,12 @@ namespace SimPlastik.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("category_id"), 1L, 1);
 
                     b.Property<string>("category_name")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("category_name_ar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("category_name_en")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("topCategorytop_category_id")
@@ -76,27 +85,21 @@ namespace SimPlastik.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("contact_id"), 1L, 1);
 
                     b.Property<string>("address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("mail")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("number")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("other_number_1")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("other_number_2")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("other_number_3")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("contact_id");
@@ -119,15 +122,18 @@ namespace SimPlastik.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("product_code")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("product_color")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("product_desc")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("product_desc_ar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("product_desc_en")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("product_img_1")
@@ -135,35 +141,39 @@ namespace SimPlastik.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("product_img_2")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("product_img_3")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("product_img_4")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("product_info_box_measurement")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("product_info_box_weight")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("product_info_piece")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("product_info_shipment")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("product_info_shipment_ar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("product_info_shipment_en")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("product_name")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("product_name_ar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("product_name_en")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("product_id");
@@ -182,7 +192,12 @@ namespace SimPlastik.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("top_category_id"), 1L, 1);
 
                     b.Property<string>("top_category_name")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("top_category_name_ar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("top_category_name_en")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("top_category_id");

@@ -1,27 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using SimPlastik.Models.Context;
 using SimPlastik.Models.ViewModels;
+using SimPlastik.Services;
 
 namespace SimPlastik.Controllers
 {
     public class AboutController : Controller
     {
         private readonly SimpaDbContext _context;
-
         public AboutController(SimpaDbContext context)
         {
             _context = context;
         }
+        [HttpGet]
         public IActionResult Index()
         {
-            var about_text = _context.Abouts.ToList();
-
-            var viewModel = new LayoutViewModel
+            var productViewModel = new LayoutViewModel
             {
-                Abouts = about_text
+                Contacts = _context.Contacts.ToList(),
+                Abouts = _context.Abouts.ToList(),
+                Products = _context.Products.ToList(),
+                Categories = _context.Categories.ToList()
             };
-
-            return View(about_text);
+            return View(productViewModel);
         }
     }
 }
