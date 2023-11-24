@@ -8862,11 +8862,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kaan Ozdemir\\Desktop\\SimPlastik\\SimPlastik\\SimPlastik.csproj",
+      "projectUniqueName": "C:\\Users\\Kaan Ozdemir\\Desktop\\New Stats\\SimPlastik\\SimPlastik\\SimPlastik.csproj",
       "projectName": "SimPlastik",
-      "projectPath": "C:\\Users\\Kaan Ozdemir\\Desktop\\SimPlastik\\SimPlastik\\SimPlastik.csproj",
+      "projectPath": "C:\\Users\\Kaan Ozdemir\\Desktop\\New Stats\\SimPlastik\\SimPlastik\\SimPlastik.csproj",
       "packagesPath": "C:\\Users\\Kaan Ozdemir\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Kaan Ozdemir\\Desktop\\SimPlastik\\SimPlastik\\obj\\",
+      "outputPath": "C:\\Users\\Kaan Ozdemir\\Desktop\\New Stats\\SimPlastik\\SimPlastik\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Kaan Ozdemir\\AppData\\Roaming\\NuGet\\NuGet.Config",

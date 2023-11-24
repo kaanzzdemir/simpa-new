@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0krO8VAc308AUWzn+jE0YLXkglsyCGbtPDu1XORlEexksmU5rs+XnirzTSTl7uYxpWxhBxS414YzGcItgUcIyA==",
+  "dgSpecHash": "nS9MOzv7pXcz3pxOSRyxkkMBYyTO07uf8kzMYtjNkU9/+KURFCB9qVPWOCxZAtxWDQfW9e9ri5K3e+VzS8QzkA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Kaan Ozdemir\\Desktop\\SimPlastik\\SimPlastik\\SimPlastik.csproj",
+  "projectFilePath": "C:\\Users\\Kaan Ozdemir\\Desktop\\New Stats\\SimPlastik\\SimPlastik\\SimPlastik.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Kaan Ozdemir\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Kaan Ozdemir\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
